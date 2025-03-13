@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { InterfacePatientRegistration } from '../../types/index';
 
-export  function RegistrationPatient() {
+export function RegistrationPatient() {
   const { register, handleSubmit, reset, watch, setValue } = useForm<InterfacePatientRegistration>({
     defaultValues: {
       name: '',
@@ -50,6 +50,7 @@ export  function RegistrationPatient() {
   const onSubmit = (data: InterfacePatientRegistration) => {
     console.log(data);
     alert('Formulário enviado com sucesso!');
+    handleReset();
   };
 
   const handleReset = () => {
@@ -66,37 +67,41 @@ export  function RegistrationPatient() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>
-        Nome:
-        <input type="text" {...register('name')} required />
-      </label>
-      <label>
-        E-mail:
-        <input type="email" {...register('email')} required />
-      </label>
-      <label>
-        Telefone:
-        <input type="tel" {...register('phone')} required />
-      </label>
-      <label>
-        Data de Nascimento:
-        <input type="date" {...register('birthdate')} required />
-      </label>
-      <label>
-        Idade:
-        <input type="text" {...register('age')} readOnly />
-      </label>
-      <label>
-        Altura (cm):
-        <input type="number" {...register('height')} />
-      </label>
-      <label>
-        Peso (kg):
-        <input type="number" {...register('weight')} />
-      </label>
-      <button type="submit">Enviar</button>
-      <button type="button" onClick={handleReset}>Redefinir</button>
-    </form>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-6 bg-base-100 shadow-xl rounded-lg">
+        <div className="form-control">
+          <label className="label">Nome:</label>
+          <input type="text" {...register('name')} required className="input input-bordered" />
+        </div>
+        <div className="form-control">
+          <label className="label">E-mail:</label>
+          <input type="email" {...register('email')} required className="input input-bordered" />
+        </div>
+        <div className="form-control">
+          <label className="label">Telefone:</label>
+          <input type="tel" {...register('phone')} required className="input input-bordered" />
+        </div>
+        <div className="form-control">
+          <label className="label">Data de Nascimento:</label>
+          <input type="date" {...register('birthdate')} required className="input input-bordered" />
+        </div>
+        <div className="form-control">
+          <label className="label">Idade:</label>
+          <input type="text" {...register('age')} readOnly className="input input-bordered" />
+        </div>
+        <div className="form-control">
+          <label className="label">Altura (cm):</label>
+          <input type="number" {...register('height')} className="input input-bordered" />
+        </div>
+        <div className="form-control">
+          <label className="label">Peso (kg):</label>
+          <input type="number" {...register('weight')} className="input input-bordered" />
+        </div>
+        <div className="flex space-x-4">
+          <button type="submit" className="btn btn-primary">Enviar</button>
+          <button type="button" onClick={handleReset} className="btn btn-secondary">Redefinir</button>
+        </div>
+      </form>
+    </div>
   );
 };
